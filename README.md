@@ -1,16 +1,16 @@
-# event_booking_app_ui
+# event_booking_app_ui_kit
 
-A new Flutter project.
+App Name : Event Booking App UI Kit
+
+Converting Figma UI Design to Flutter.
+
+Figma Design File Link : https://freebieflux.com/download-event-booking-app-ui-kit-freebie-by-ashfak-ahmed-sayem.html
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+If you want to see the Code Screen by Screen then here is the flow
 
-A few resources to get you started if this is your first Flutter project:
+1. Splash Screen
+  - Starter Code : https://github.com/mrashidcit/Event-Booking-App-UI---Flutter.git
+  - Complete Code : https://github.com/mrashidcit/Event-Booking-App-UI---Flutter.git
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
