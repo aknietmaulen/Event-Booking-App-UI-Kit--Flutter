@@ -1,5 +1,6 @@
 import 'package:event_booking_app_ui/screens/onboarding1_screen.dart';
 import 'package:event_booking_app_ui/screens/signin_screen.dart';
+import 'package:event_booking_app_ui/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 import './screens/splash_screen.dart';
 
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
       ),
       // home: SplashScreen(),
       // home: Onboarding1Screen(),
-      home: SignInScreen(),
+      // home: SignInScreen(),
+      home: SignUpScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
