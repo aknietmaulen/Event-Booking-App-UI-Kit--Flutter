@@ -5,6 +5,7 @@ import 'package:event_booking_app_ui/screens/verification_screen.dart';
 import 'package:flutter/material.dart';
 import './screens/splash_screen.dart';
 import './screens/resset_password_screen.dart';
+import "./screens/home/home_screen.dart";
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
       // home: Onboarding1Screen(),
       // home: SignInScreen(),
       // home: VerificationScreen(),
-      home: RessetPasswordScreen(),
+      // home: RessetPasswordScreen(),
+      home: HomeScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
