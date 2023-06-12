@@ -5,6 +5,9 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import '../../my_theme.dart';
 import './widgets/custom_app_bar.dart';
 import './widgets/custom_search_container.dart';
+import './widgets/top_container.dart';
+import './widgets/event_item.dart';
+import '../../models/event_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -36,35 +39,71 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: MyTheme.customRed,
     ),
   ];
+  final eventList = [
+    EventModel(
+      title: "International Band Meu....",
+      image: "assets/images/upcomming_img1.png",
+      going: 20,
+      address: "36 Guild Street London, UK",
+    ),
+    EventModel(
+      title: "International Band Meu....",
+      image: "assets/images/upcomming_img2.png",
+      going: 14,
+      address: "37 Guild Street London, UK",
+    ),
+    EventModel(
+      title: "International Band Meu....",
+      image: "assets/images/upcomming_img3.png",
+      going: 16,
+      address: "38 Guild Street London, UK",
+    ),
+    EventModel(
+      title: "International Band Meu....",
+      image: "assets/images/upcomming_img4.png",
+      going: 18,
+      address: "39 Guild Street London, UK",
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        height: 170,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(36),
-            bottomRight: Radius.circular(36),
-          ),
-          color: MyTheme.primaryColor,
-        ),
-        padding: EdgeInsets.only(top: 40, left: 16, right: 16),
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
+      body: Column(
+        children: [
+          // TopContainer
+          TopContainer(tabItemsList: tabItemsList),
+          // UpcomingEvents Container
+          SizedBox(height: 30),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            child: Row(
               children: [
-                CustomAppBar(),
-                CustomSearchContainer(),
+                Expanded(
+                  child: Text(
+                    "Upcoming Events",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                  ),
+                ),
+                Text("See All"),
+                Icon(Icons.arrow_right)
               ],
             ),
-            Positioned(
-              bottom: -30,
-              child: TabItemsList(tabItemsList: tabItemsList),
-            )
-          ],
-        ),
+          ),
+          // Upcoming Events List
+          Container(
+            width: double.infinity,
+            height: 300,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (ctx, index) {
+                final eventModel = eventList[index];
+                return EventItem(eventModel: eventModel);
+              },
+              itemCount: eventList.length,
+              padding: EdgeInsets.symmetric(horizontal: 12),
+            ),
+          )
+        ],
       ),
     );
   }
