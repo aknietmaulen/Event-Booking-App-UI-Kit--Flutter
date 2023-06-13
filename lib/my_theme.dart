@@ -5,6 +5,7 @@ class MyTheme {
 
   static var white = Colors.white;
   static var grey = Colors.grey;
+  static var black = Colors.black;
 
   // custom colors
 
@@ -14,4 +15,6 @@ class MyTheme {
   static var customYellowWithOrangeShade = Color(0xFFF59762);
 
   static var foodTabItemColor = Color(0xFF29D697);
+  static var inviteButtonColor = Color(0xFF00F8FF);
+  static var inviteTheFriendContainerColor = Color(0xFF00F8FF);
 }
