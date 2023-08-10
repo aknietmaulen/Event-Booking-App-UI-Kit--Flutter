@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:event_booking_app_ui/models/tab_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -39,6 +41,39 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: MyTheme.customRed,
     ),
   ];
+
+  final bottomBarItemsDataList = [
+    TabItemModel(
+      image: "assets/icons/ic_explore.png",
+      title: "Explore",
+      backgroundColor: MyTheme.customRed,
+    ),
+    TabItemModel(
+      image: "assets/icons/ic_calendar.png",
+      title: "Events",
+      backgroundColor: MyTheme.customYellowWithOrangeShade,
+    ),
+    TabItemModel(
+      image: "assets/icons/ic_location_marker.png",
+      title: "Map",
+      backgroundColor: MyTheme.foodTabItemColor,
+    ),
+    TabItemModel(
+      image: "assets/icons/ic_profile.png",
+      title: "Profile",
+      backgroundColor: MyTheme.customRed,
+    ),
+  ];
+
+  var bottomBarItemSelectedIndex = 0;
+
+  void selectBottomBarItem(int index) {
+    print(">> selectBottomBarItem : index = $index");
+    setState(() {
+      bottomBarItemSelectedIndex = index;
+    });
+  }
+
   final eventList = [
     EventModel(
       title: "International Band Meu....",
@@ -192,6 +227,96 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           )
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(
+          Icons.add_box,
+        ),
+      ),
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterDocked,
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            BottomBarItem(
+              imagePath: bottomBarItemsDataList[0].image,
+              title: bottomBarItemsDataList[0].title,
+              isSelected: bottomBarItemSelectedIndex == 0,
+              onTap: () {
+                selectBottomBarItem(0);
+              },
+            ),
+            BottomBarItem(
+              imagePath: bottomBarItemsDataList[1].image,
+              title: bottomBarItemsDataList[1].title,
+              isSelected: bottomBarItemSelectedIndex == 1,
+              onTap: () {
+                selectBottomBarItem(1);
+              },
+            ),
+            SizedBox(width: 30),
+            BottomBarItem(
+              imagePath: bottomBarItemsDataList[2].image,
+              title: bottomBarItemsDataList[2].title,
+              isSelected: bottomBarItemSelectedIndex == 2,
+              onTap: () {
+                selectBottomBarItem(2);
+              },
+            ),
+            BottomBarItem(
+              imagePath: bottomBarItemsDataList[3].image,
+              title: bottomBarItemsDataList[3].title,
+              isSelected: bottomBarItemSelectedIndex == 3,
+              onTap: () {
+                selectBottomBarItem(3);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class BottomBarItem extends StatelessWidget {
+  String imagePath;
+  String title;
+  bool isSelected;
+  Function onTap;
+
+  BottomBarItem(
+      {super.key,
+      required this.imagePath,
+      required this.title,
+      required this.isSelected,
+      required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        onTap.call();
+      },
+      child: Container(
+        margin: EdgeInsets.only(top: 6),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image(
+              width: 24,
+              height: 24,
+              image: AssetImage(imagePath),
+              color: (isSelected) ? MyTheme.customBlue1 : MyTheme.grey,
+            ),
+            Text(
+              title,
+              style: TextStyle(
+                  color: (isSelected) ? MyTheme.customBlue1 : MyTheme.grey),
+            )
+          ],
+        ),
       ),
     );
   }

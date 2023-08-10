@@ -10,6 +10,7 @@ class MyTheme {
   // custom colors
 
   static var customBlue = Color(0xFF3F38DD);
+  static var customBlue1 = Color(0xFF2F80ED);
   static var customLightBlue = Color(0xFF5D56F3);
   static var customRed = Color(0xFFF0635A);
   static var customYellowWithOrangeShade = Color(0xFFF59762);
