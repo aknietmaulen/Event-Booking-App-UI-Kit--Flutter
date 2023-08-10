@@ -108,122 +108,34 @@ class _HomeScreenState extends State<HomeScreen> {
           // TopContainer
           TopContainer(tabItemsList: tabItemsList),
           // UpcomingEvents Container
-          SizedBox(height: 0),
-
-          Expanded(
-            child: ListView(
+          SizedBox(height: 30),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            child: Row(
               children: [
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "Upcoming Events",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                      Text("See All"),
-                      Icon(Icons.arrow_right)
-                    ],
+                Expanded(
+                  child: Text(
+                    "Upcoming Events",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                   ),
                 ),
-                // Upcoming Events List
-                Container(
-                  width: double.infinity,
-                  height: 300,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (ctx, index) {
-                      final eventModel = eventList[index];
-                      return EventItem(eventModel: eventModel);
-                    },
-                    itemCount: eventList.length,
-                    padding: EdgeInsets.symmetric(horizontal: 12),
-                  ),
-                ),
-                // Invite Your Fiends
-                Container(
-                  width: double.infinity,
-                  // padding: EdgeInsets.symmetric(vertical: 16, horizontal: 12),
-                  margin: EdgeInsets.symmetric(horizontal: 16),
-                  decoration: BoxDecoration(
-                    color:
-                        MyTheme.inviteTheFriendContainerColor.withOpacity(0.16),
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                  ),
-                  alignment: Alignment.centerLeft,
-                  child: Stack(
-                    children: [
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 16, horizontal: 12),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Invite your friends",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8),
-                              child: Text(
-                                "Get \$20 for ticket",
-                                style: TextStyle(
-                                    color: MyTheme.black.withOpacity(0.7)),
-                              ),
-                            ),
-                            SizedBox(height: 4),
-                            Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 8),
-                                decoration: BoxDecoration(
-                                  color: MyTheme.inviteButtonColor,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(4)),
-                                ),
-                                child: Text(
-                                  "INVITE",
-                                  style: TextStyle(
-                                      color: MyTheme.white,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600),
-                                )),
-                          ],
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: Image(
-                          height: 140,
-                          image: AssetImage(
-                              'assets/images/img_inviate_your_friend.png'),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "Nearby You",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                      Text("See All"),
-                      Icon(Icons.arrow_right)
-                    ],
-                  ),
-                ),
+                Text("See All"),
+                Icon(Icons.arrow_right)
               ],
+            ),
+          ),
+          // Upcoming Events List
+          Container(
+            width: double.infinity,
+            height: 300,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (ctx, index) {
+                final eventModel = eventList[index];
+                return EventItem(eventModel: eventModel);
+              },
+              itemCount: eventList.length,
+              padding: EdgeInsets.symmetric(horizontal: 12),
             ),
           )
         ],
