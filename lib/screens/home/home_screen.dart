@@ -21,24 +21,29 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final tabItemsList = [
     TabItemModel(
-      image: "assets/icons/ic_sports.png",
+      image: "assets/icons/sports.png",
       title: "Sports",
-      backgroundColor: MyTheme.customRed,
+      backgroundColor: MyTheme.blueSport,
     ),
     TabItemModel(
-      image: "assets/icons/ic_music.png",
-      title: "Music",
-      backgroundColor: MyTheme.customYellowWithOrangeShade,
+      image: "assets/icons/nature.png",
+      title: "Nature",
+      backgroundColor: MyTheme.greenNature,
     ),
     TabItemModel(
-      image: "assets/icons/ic_food.png",
-      title: "Food",
-      backgroundColor: MyTheme.foodTabItemColor,
+      image: "assets/icons/enter.png",
+      title: "Entertainment",
+      backgroundColor: MyTheme.orangeEnter,
     ),
     TabItemModel(
-      image: "assets/icons/ic_art.png",
-      title: "Arts",
-      backgroundColor: MyTheme.customRed,
+      image: "assets/icons/emergency.png",
+      title: "Emergency",
+      backgroundColor: MyTheme.redEmer,
+    ),
+    TabItemModel(
+      image: "assets/icons/formal.png",
+      title: "Formal",
+      backgroundColor: MyTheme.indiForm,
     ),
   ];
 
@@ -226,8 +231,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => MapPage(
-                      //savedEvents: eventList, // Pass the saved events here
+                    builder: (context) => MapPage( selectedCity: 'Astana'
                     ),
                   ),
                 );
