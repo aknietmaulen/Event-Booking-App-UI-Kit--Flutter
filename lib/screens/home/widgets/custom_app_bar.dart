@@ -10,7 +10,6 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Image(image: AssetImage("assets/icons/ic_menu.png")),
         Expanded(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -26,13 +25,12 @@ class CustomAppBar extends StatelessWidget {
                 ],
               ),
               Text(
-                "New Yourk, USA",
+                "Astana, Kazakhstan",
                 style: TextStyle(color: MyTheme.white),
               )
             ],
           ),
         ),
-        Image(image: AssetImage("assets/icons/ic_notification.png")),
       ],
     );
   }

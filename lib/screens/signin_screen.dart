@@ -58,7 +58,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   child: Column(
                     children: [
                       SizedBox(height: 54),
-                      Image(image: AssetImage('assets/images/logo.png')),
+                      Image(image: AssetImage('assets/images/logo1.png')),
                       SizedBox(height: 12),
                       Text(
                         'EventHub',

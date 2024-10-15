@@ -35,17 +35,6 @@ class CustomSearchContainer extends StatelessWidget {
           decoration: BoxDecoration(
               color: MyTheme.customLightBlue.withOpacity(1),
               borderRadius: BorderRadius.all(Radius.circular(20))),
-          child: Row(
-            children: [
-              Image(
-                image: AssetImage('assets/icons/ic_filter.png'),
-              ),
-              Text(
-                'Filters',
-                style: TextStyle(color: MyTheme.white),
-              ),
-            ],
-          ),
         )
       ],
     );

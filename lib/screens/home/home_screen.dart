@@ -1,9 +1,9 @@
 import 'dart:math';
-
 import 'package:event_booking_app_ui/models/tab_item_model.dart';
+import 'package:event_booking_app_ui/screens/events.dart';
+import 'package:event_booking_app_ui/screens/map_page.dart';
+import 'package:event_booking_app_ui/screens/profile_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import '../../my_theme.dart';
 import './widgets/custom_app_bar.dart';
 import './widgets/custom_search_container.dart';
@@ -76,78 +76,117 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final eventList = [
     EventModel(
-      title: "International Band Meu....",
+      title: "Digital Bridge",
       image: "assets/images/upcomming_img1.png",
       going: 20,
-      address: "36 Guild Street London, UK",
+      address: "EXPO Center",
     ),
     EventModel(
-      title: "International Band Meu....",
+      title: "Nomad Games",
       image: "assets/images/upcomming_img2.png",
       going: 14,
-      address: "37 Guild Street London, UK",
+      address: "Botanic Park",
     ),
     EventModel(
-      title: "International Band Meu....",
+      title: "Egor Kreed Concert",
       image: "assets/images/upcomming_img3.png",
       going: 16,
-      address: "38 Guild Street London, UK",
+      address: "Barys Arena",
     ),
     EventModel(
-      title: "International Band Meu....",
+      title: "Conference HFIU",
       image: "assets/images/upcomming_img4.png",
       going: 18,
-      address: "39 Guild Street London, UK",
+      address: "AITU",
     ),
   ];
+
+  final nearbyEventList = [
+    EventModel(
+      title: "Local Fair",
+      image: "assets/images/nearby_img1.png",
+      going: 25,
+      address: "Central Park",
+    ),
+    EventModel(
+      title: "RMT Festival",
+      image: "assets/images/nearby_img2.png",
+      going: 30,
+      address: "Mangilik El, 50",
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          // TopContainer
-          TopContainer(tabItemsList: tabItemsList),
-          // UpcomingEvents Container
-          SizedBox(height: 30),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    "Upcoming Events",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // TopContainer
+            TopContainer(tabItemsList: tabItemsList),
+            // UpcomingEvents Container
+            SizedBox(height: 30),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      "Upcoming Volunteering Events",
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                    ),
                   ),
-                ),
-                Text("See All"),
-                Icon(Icons.arrow_right)
-              ],
+                  Text("See All"),
+                  Icon(Icons.arrow_right),
+                ],
+              ),
             ),
-          ),
-          // Upcoming Events List
-          Container(
-            width: double.infinity,
-            height: 300,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (ctx, index) {
-                final eventModel = eventList[index];
-                return EventItem(eventModel: eventModel);
-              },
-              itemCount: eventList.length,
-              padding: EdgeInsets.symmetric(horizontal: 12),
+            // Upcoming Events List
+            SizedBox(
+              height: 250, // Fixed height to avoid overflow
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (ctx, index) {
+                  final eventModel = eventList[index];
+                  return EventItem(eventModel: eventModel);
+                },
+                itemCount: eventList.length,
+                padding: EdgeInsets.symmetric(horizontal: 12),
+              ),
             ),
-          )
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(
-          Icons.add_box,
+            // Nearby Events Section
+            SizedBox(height: 30),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      "Nearby Events",
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  Text("See All"),
+                  Icon(Icons.arrow_right),
+                ],
+              ),
+            ),
+            // Nearby Events List
+            SizedBox(
+              height: 250, // Fixed height to avoid overflow
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (ctx, index) {
+                  final eventModel = nearbyEventList[index];
+                  return EventItem(eventModel: eventModel);
+                },
+                itemCount: nearbyEventList.length,
+                padding: EdgeInsets.symmetric(horizontal: 12),
+              ),
+            ),
+          ],
         ),
       ),
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniCenterDocked,
       bottomNavigationBar: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -166,15 +205,32 @@ class _HomeScreenState extends State<HomeScreen> {
               isSelected: bottomBarItemSelectedIndex == 1,
               onTap: () {
                 selectBottomBarItem(1);
+
+                // Navigate to the Events Page
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => EventsPage(
+                      //savedEvents: eventList, // Pass the saved events here
+                    ),
+                  ),
+                );
               },
             ),
-            SizedBox(width: 30),
+            SizedBox(width: 30), // Spacing for FAB
             BottomBarItem(
               imagePath: bottomBarItemsDataList[2].image,
               title: bottomBarItemsDataList[2].title,
               isSelected: bottomBarItemSelectedIndex == 2,
               onTap: () {
                 selectBottomBarItem(2);
+
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => MapPage(
+                      //savedEvents: eventList, // Pass the saved events here
+                    ),
+                  ),
+                );
               },
             ),
             BottomBarItem(
@@ -183,6 +239,14 @@ class _HomeScreenState extends State<HomeScreen> {
               isSelected: bottomBarItemSelectedIndex == 3,
               onTap: () {
                 selectBottomBarItem(3);
+
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ProfilePage(
+                      //savedEvents: eventList, // Pass the saved events here
+                    ),
+                  ),
+                );
               },
             ),
           ],
@@ -247,7 +311,6 @@ class TabItemsList extends StatelessWidget {
     final query = MediaQuery.of(context);
     return Container(
       height: 40,
-      // width: double.infinity,
       width: query.size.width,
       margin: EdgeInsets.symmetric(vertical: 12),
       child: ListView.builder(
@@ -290,13 +353,19 @@ class TabItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Image(
-            image: AssetImage('$image'),
+            image: AssetImage(image),
+            width: 18,
+            height: 18,
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 10),
           Text(
-            "$title",
-            style: TextStyle(color: MyTheme.white, fontSize: 18),
-          )
+            title,
+            style: const TextStyle(
+              fontSize: 12,
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
         ],
       ),
     );

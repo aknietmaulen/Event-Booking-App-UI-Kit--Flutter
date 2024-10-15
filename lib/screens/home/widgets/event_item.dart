@@ -44,7 +44,7 @@ class EventItem extends StatelessWidget {
                           fontSize: 18),
                     ),
                     Text(
-                      "JUNE",
+                      "NOVEMBER",
                       style: TextStyle(
                         color: MyTheme.customRed,
                         fontSize: 12,
@@ -79,40 +79,9 @@ class EventItem extends StatelessWidget {
               ),
             ),
           ),
-          Row(
+          const Row(
             children: [
-              Stack(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(left: 50),
-                    child: CircleAvatar(
-                      backgroundImage:
-                          AssetImage("assets/images/profile_img3.png"),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 26),
-                    child: CircleAvatar(
-                      backgroundImage:
-                          AssetImage("assets/images/profile_img2.png"),
-                    ),
-                  ),
-                  Container(
-                    child: CircleAvatar(
-                      backgroundImage:
-                          AssetImage("assets/images/profile_img1.png"),
-                    ),
-                  ),
-                ],
-              ),
               SizedBox(width: 8),
-              Text(
-                "+${eventModel.going} Going",
-                style: TextStyle(
-                  color: MyTheme.customBlue,
-                  fontWeight: FontWeight.w500,
-                ),
-              )
             ],
           ),
           Padding(
