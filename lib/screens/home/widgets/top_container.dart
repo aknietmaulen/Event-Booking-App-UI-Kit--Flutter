@@ -3,6 +3,7 @@ import 'package:event_booking_app_ui/my_theme.dart';
 import 'package:event_booking_app_ui/screens/home/home_screen.dart';
 import 'package:event_booking_app_ui/screens/home/widgets/custom_app_bar.dart';
 import 'package:event_booking_app_ui/screens/home/widgets/custom_search_container.dart';
+import 'package:event_booking_app_ui/screens/map_page.dart';
 import 'package:flutter/material.dart';
 
 class TopContainer extends StatelessWidget {

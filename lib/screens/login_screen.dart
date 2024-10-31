@@ -26,7 +26,7 @@ class LoginScreen extends StatelessWidget {
             children: <Widget>[
               TextFormField(
                 controller: _emailController,
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.black),
                 decoration: const InputDecoration(labelText: 'Email'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -37,7 +37,7 @@ class LoginScreen extends StatelessWidget {
               ),
               TextFormField(
                 controller: _passwordController,
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.black),
                 decoration: const InputDecoration(labelText: 'Password'),
                 obscureText: true,
                 validator: (value) {

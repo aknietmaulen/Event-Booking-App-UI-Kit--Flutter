@@ -1,11 +1,12 @@
 import 'package:event_booking_app_ui/models/tab_item_model.dart';
+import 'package:event_booking_app_ui/providers/event_provider.dart';
 import 'package:event_booking_app_ui/screens/home/home_screen.dart';
 import 'package:event_booking_app_ui/screens/home/widgets/event_item.dart';
 import 'package:event_booking_app_ui/screens/map_page.dart';
 import 'package:event_booking_app_ui/screens/profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../my_theme.dart';
-import '../../models/event_model.dart';
 
 class EventsPage extends StatefulWidget {
   const EventsPage({super.key});
@@ -41,64 +42,40 @@ class _EventsPageState extends State<EventsPage> {
   var bottomBarItemSelectedIndex = 1; // Start on Events page
 
   void selectBottomBarItem(int index) {
-    print(">> selectBottomBarItem : index = $index");
     setState(() {
       bottomBarItemSelectedIndex = index;
     });
-    // No need for navigation logic here since we're in EventsPage
   }
 
-  final eventList = [
-    EventModel(
-      title: "Digital Bridge",
-      image: "assets/images/upcomming_img1.png",
-      going: 20,
-      address: "EXPO Center",
-    ),
-    EventModel(
-      title: "Nomad Games",
-      image: "assets/images/upcomming_img2.png",
-      going: 14,
-      address: "Botanic Park",
-    ),
-    EventModel(
-      title: "Egor Kreed Concert",
-      image: "assets/images/upcomming_img3.png",
-      going: 16,
-      address: "Barys Arena",
-    ),
-    EventModel(
-      title: "Conference HFIU",
-      image: "assets/images/upcomming_img4.png",
-      going: 18,
-      address: "AITU",
-    ),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    // Fetch events when the widget initializes
+    Provider.of<EventsProvider>(context, listen: false).fetchEvents();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final eventsProvider = Provider.of<EventsProvider>(context);
+    final eventList = eventsProvider.events;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Events'),
         automaticallyImplyLeading: false,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // Upcoming Events List displayed vertically
-            ListView.builder(
+      body: eventList.isEmpty
+        ? Center(child: CircularProgressIndicator())
+        : Expanded(
+            child: ListView.builder(
               itemCount: eventList.length,
               padding: EdgeInsets.all(12),
-              physics: NeverScrollableScrollPhysics(), // Disable scrolling for inner ListView
-              shrinkWrap: true, // Allow the inner ListView to take up only the needed space
               itemBuilder: (ctx, index) {
                 final eventModel = eventList[index];
-                return EventItem(eventModel: eventModel);
+                return HomeEventItem(eventModel: eventModel);
               },
             ),
-          ],
-        ),
-      ),
+          ),
       bottomNavigationBar: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -111,9 +88,7 @@ class _EventsPageState extends State<EventsPage> {
                 selectBottomBarItem(0);
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => HomeScreen(
-                      //savedEvents: eventList, // Pass the saved events here
-                    ),
+                    builder: (context) => HomeScreen(),
                   ),
                 );
               },
@@ -135,9 +110,7 @@ class _EventsPageState extends State<EventsPage> {
                 selectBottomBarItem(2);
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => MapPage(
-                      //savedEvents: eventList, // Pass the saved events here
-                    ),
+                    builder: (context) => MapPage(),
                   ),
                 );
               },
@@ -150,9 +123,7 @@ class _EventsPageState extends State<EventsPage> {
                 selectBottomBarItem(3);
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => ProfilePage(
-                      //savedEvents: eventList, // Pass the saved events here
-                    ),
+                    builder: (context) => ProfilePage(),
                   ),
                 );
               },
@@ -185,9 +156,11 @@ class BottomBarItem extends StatelessWidget {
         onTap.call();
       },
       child: Container(
-        margin: EdgeInsets.only(top: 6),
+        width: 60, // Set a fixed width for equal sizing
+        padding: EdgeInsets.symmetric(vertical: 8), // Consistent padding for all items
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image(
               width: 24,
@@ -195,11 +168,14 @@ class BottomBarItem extends StatelessWidget {
               image: AssetImage(imagePath),
               color: (isSelected) ? MyTheme.customBlue1 : MyTheme.grey,
             ),
+            SizedBox(height: 4), // Space between icon and text
             Text(
               title,
               style: TextStyle(
-                color: (isSelected) ? MyTheme.customBlue1 : MyTheme.grey,
+                fontSize: 12, // Ensure consistent font size for all text labels
+                color: isSelected ? MyTheme.customBlue1 : MyTheme.grey,
               ),
+              textAlign: TextAlign.center,
             )
           ],
         ),

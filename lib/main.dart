@@ -1,3 +1,4 @@
+import 'package:event_booking_app_ui/providers/event_provider.dart';
 import 'package:event_booking_app_ui/screens/onboarding1_screen.dart';
 import 'package:event_booking_app_ui/screens/login_screen.dart';
 import 'package:event_booking_app_ui/screens/register_screen.dart';
@@ -23,9 +24,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<AuthProvider>(
-          create: (_) => AuthProvider(),
-        ),
+        ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider(),),
+        ChangeNotifierProvider(create: (_) => EventsProvider()),
         // Add other providers here if needed
       ],
       child: MaterialApp(

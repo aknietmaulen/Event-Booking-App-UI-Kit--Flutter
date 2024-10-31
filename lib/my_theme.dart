@@ -16,7 +16,7 @@ class MyTheme {
   static var foodTabItemColor = Color.fromARGB(255, 214, 205, 41);
   
   static var blueSport = Color.fromRGBO(70, 205, 251, 1);
-  static var greenNature = Color.fromRGBO(41, 214, 151, 1);
+  static var greenNature = Color.fromRGBO(12, 78, 54, 1);
   static var orangeEnter = Color.fromRGBO(245, 151, 98, 1);
   static var redEmer = Color.fromRGBO(240, 99, 90, 1);
   static var indiForm = Color.fromRGBO(61, 80, 223, 1);

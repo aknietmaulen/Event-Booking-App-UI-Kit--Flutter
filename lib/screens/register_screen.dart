@@ -21,23 +21,23 @@ class RegisterScreen extends StatelessWidget {
           children: <Widget>[
             TextField(
               controller: _nameController,
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.black),
               decoration: const InputDecoration(labelText: 'Name'),
             ),
             TextField(
               controller: _emailController,
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.black),
               decoration: const InputDecoration(labelText: 'Email'),
             ),
             TextField(
               controller: _passwordController,
               decoration: const InputDecoration(labelText: 'Password'),
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.black),
               obscureText: true,
             ),
             TextField(
               controller: _imageUrlController,
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.black),
               decoration: const InputDecoration(labelText: 'Profile Image URL'), // Field for image URL
             ),
             ElevatedButton(

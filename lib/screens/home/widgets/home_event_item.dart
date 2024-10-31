@@ -1,49 +1,32 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:event_booking_app_ui/models/event_model.dart';
 import 'package:event_booking_app_ui/my_theme.dart';
 import 'package:flutter/material.dart';
-
-import 'package:event_booking_app_ui/models/event_model.dart';
-import 'package:event_booking_app_ui/my_theme.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class HomeEventItem extends StatelessWidget {
-  final EventModel eventModel;
+  final EventModel homeEventModel;
 
   HomeEventItem({
-    super.key,
-    required this.eventModel,
-  });
+    Key? key,
+    required this.homeEventModel,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Format the event date
-    final String day = DateFormat('dd').format(eventModel.date);
-    final String month = DateFormat('MMMM').format(eventModel.date).toUpperCase();
-
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 6),
-      height: 250, // Set a fixed height for each event item
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Stack(
             children: [
               Container(
-                height: 150, // Set fixed height for image container
-                width: double.infinity,
                 clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(12)),
                 ),
-                child: AspectRatio(
-                  aspectRatio: 16 / 9, // Adjust the ratio as needed
-                  child: Image.network(
-                    eventModel.photo,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) => Icon(Icons.broken_image),
-                  ),
+                child: Image.network(
+                  homeEventModel.photo,
+                  fit: BoxFit.cover,
                 ),
               ),
               Positioned(
@@ -58,18 +41,18 @@ class HomeEventItem extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        day,
+                        homeEventModel.date.day.toString(),
                         style: TextStyle(
                           color: MyTheme.customRed,
                           fontWeight: FontWeight.w600,
-                          fontSize: 15,
+                          fontSize: 18,
                         ),
                       ),
                       Text(
-                        month,
+                        homeEventModel.date.month.toString().toUpperCase(),
                         style: TextStyle(
                           color: MyTheme.customRed,
-                          fontSize: 10,
+                          fontSize: 12,
                         ),
                       ),
                     ],
@@ -78,7 +61,6 @@ class HomeEventItem extends StatelessWidget {
               ),
               Positioned(
                 right: 8,
-                top: 8,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 6, vertical: 6),
                   decoration: BoxDecoration(
@@ -90,15 +72,15 @@ class HomeEventItem extends StatelessWidget {
                     color: MyTheme.customRed,
                   ),
                 ),
-              )
+              ),
             ],
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: Text(
-              eventModel.name,
+              homeEventModel.name,
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -111,10 +93,11 @@ class HomeEventItem extends StatelessWidget {
                   Icons.location_on_rounded,
                   color: MyTheme.grey,
                 ),
+                SizedBox(width: 4),
                 Text(
-                  eventModel.place,
+                  homeEventModel.place,
                   style: TextStyle(color: MyTheme.grey, fontSize: 16),
-                )
+                ),
               ],
             ),
           ),
