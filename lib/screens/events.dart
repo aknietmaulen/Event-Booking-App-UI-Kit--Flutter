@@ -1,5 +1,8 @@
 import 'package:event_booking_app_ui/models/tab_item_model.dart';
+import 'package:event_booking_app_ui/screens/home/home_screen.dart';
 import 'package:event_booking_app_ui/screens/home/widgets/event_item.dart';
+import 'package:event_booking_app_ui/screens/map_page.dart';
+import 'package:event_booking_app_ui/screens/profile_page.dart';
 import 'package:flutter/material.dart';
 import '../../my_theme.dart';
 import '../../models/event_model.dart';
@@ -77,6 +80,7 @@ class _EventsPageState extends State<EventsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Events'),
+        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -105,6 +109,13 @@ class _EventsPageState extends State<EventsPage> {
               isSelected: bottomBarItemSelectedIndex == 0,
               onTap: () {
                 selectBottomBarItem(0);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => HomeScreen(
+                      //savedEvents: eventList, // Pass the saved events here
+                    ),
+                  ),
+                );
               },
             ),
             BottomBarItem(
@@ -122,6 +133,13 @@ class _EventsPageState extends State<EventsPage> {
               isSelected: bottomBarItemSelectedIndex == 2,
               onTap: () {
                 selectBottomBarItem(2);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => MapPage(
+                      //savedEvents: eventList, // Pass the saved events here
+                    ),
+                  ),
+                );
               },
             ),
             BottomBarItem(
@@ -130,6 +148,13 @@ class _EventsPageState extends State<EventsPage> {
               isSelected: bottomBarItemSelectedIndex == 3,
               onTap: () {
                 selectBottomBarItem(3);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ProfilePage(
+                      //savedEvents: eventList, // Pass the saved events here
+                    ),
+                  ),
+                );
               },
             ),
           ],
