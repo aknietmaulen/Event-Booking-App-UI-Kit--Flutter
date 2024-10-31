@@ -14,7 +14,10 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Login")),
+      appBar: AppBar(
+        title: const Text("Login"),
+        automaticallyImplyLeading: false, // Prevent back button from appearing
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(

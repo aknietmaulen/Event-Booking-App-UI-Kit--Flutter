@@ -167,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Expanded(
                     child: Text(
-                      "Nearby Events",
+                      "For you",
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                     ),
                   ),
@@ -231,7 +231,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => MapPage( selectedCity: 'Astana'
+                    builder: (context) => MapPage(
                     ),
                   ),
                 );
