@@ -1,3 +1,4 @@
+import 'package:event_booking_app_ui/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -82,6 +83,11 @@ class Onboarding3Screen extends StatelessWidget {
                         ],
                       ),
                       InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => LoginScreen(),
+                          ));
+                        },
                         child: Text(
                           'Next',
                           style: TextStyle(

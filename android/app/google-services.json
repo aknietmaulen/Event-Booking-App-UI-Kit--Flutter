@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "172198016313",
+    "project_id": "voluntree-953fd",
+    "storage_bucket": "voluntree-953fd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172198016313:android:97355eb77d35dadcfc24e8",
+        "android_client_info": {
+          "package_name": "com.example.event_booking_app_ui"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCFtNmVmcT6bY0HLYLU5YF48Lbfehg8nE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
