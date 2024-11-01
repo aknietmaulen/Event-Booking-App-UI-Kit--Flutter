@@ -6,8 +6,11 @@ import 'dart:math';
 class EventsProvider with ChangeNotifier {
   List<EventModel> _events = [];
 
-  List<EventModel> get events => _events;
   List<EventModel>? _randomEvents;  // Store selected random events here
+  List<EventModel> _filteredEvents = []; // For filtered events based on category and search
+
+  List<EventModel> get events => _events;
+  List<EventModel> get filteredEvents => _filteredEvents;
 
 
   Future<void> fetchEvents() async {
@@ -45,5 +48,8 @@ class EventsProvider with ChangeNotifier {
     }
     return _randomEvents ?? [];
   }
+
+
+
 
 }

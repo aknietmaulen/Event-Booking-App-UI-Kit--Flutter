@@ -153,11 +153,12 @@ class _ProfilePageState extends State<ProfilePage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             BottomBarItem(
-              imagePath: bottomBarItemsDataList[0].image,
-              title: bottomBarItemsDataList[0].title,
+              imagePath: "assets/icons/ic_explore.png",
+              title: "Explore",
               isSelected: bottomBarItemSelectedIndex == 0,
               onTap: () {
                 selectBottomBarItem(0);
+                // Navigate to the Events Page
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => HomeScreen(
@@ -168,8 +169,8 @@ class _ProfilePageState extends State<ProfilePage> {
               },
             ),
             BottomBarItem(
-              imagePath: bottomBarItemsDataList[1].image,
-              title: bottomBarItemsDataList[1].title,
+              imagePath: "assets/icons/ic_calendar.png",
+              title: "Events",
               isSelected: bottomBarItemSelectedIndex == 1,
               onTap: () {
                 selectBottomBarItem(1);
@@ -186,23 +187,16 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             SizedBox(width: 30), // Spacing for FAB
             BottomBarItem(
-              imagePath: bottomBarItemsDataList[2].image,
-              title: bottomBarItemsDataList[2].title,
+              imagePath: "assets/icons/ic_location_marker.png",
+              title: "Map",
               isSelected: bottomBarItemSelectedIndex == 2,
               onTap: () {
                 selectBottomBarItem(2);
-
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => MapPage(
-                    ),
-                  ),
-                );
               },
             ),
             BottomBarItem(
-              imagePath: bottomBarItemsDataList[3].image,
-              title: bottomBarItemsDataList[3].title,
+              imagePath: "assets/icons/ic_profile.png",
+              title: "Profile",
               isSelected: bottomBarItemSelectedIndex == 3,
               onTap: () {
                 selectBottomBarItem(3);
@@ -256,78 +250,3 @@ class BottomBarItem extends StatelessWidget {
     );
   }
 }
-
-class TabItemsList extends StatelessWidget {
-  const TabItemsList({
-    super.key,
-    required this.tabItemsList,
-  });
-
-  final List<TabItemModel> tabItemsList;
-
-  @override
-  Widget build(BuildContext context) {
-    final query = MediaQuery.of(context);
-    return Container(
-      height: 40,
-      width: query.size.width,
-      margin: EdgeInsets.symmetric(vertical: 12),
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (ctx, index) {
-          final item = tabItemsList[index];
-          return TabItem(
-            image: item.image,
-            title: item.title,
-            backgroundColor: item.backgroundColor,
-          );
-        },
-        itemCount: tabItemsList.length,
-      ),
-    );
-  }
-}
-
-class TabItem extends StatelessWidget {
-  String image;
-  String title;
-  Color backgroundColor;
-  TabItem({
-    super.key,
-    required this.image,
-    required this.title,
-    required this.backgroundColor,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 14),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(24)),
-        color: backgroundColor,
-      ),
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Image(
-            image: AssetImage(image),
-            width: 18,
-            height: 18,
-          ),
-          const SizedBox(width: 10),
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 12,
-              color: Colors.white,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-

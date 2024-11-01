@@ -1,4 +1,5 @@
 import 'package:event_booking_app_ui/models/tab_item_model.dart';
+import 'package:event_booking_app_ui/screens/event_detail.dart';
 import 'package:event_booking_app_ui/screens/events.dart';
 import 'package:event_booking_app_ui/screens/map_page.dart';
 import 'package:event_booking_app_ui/screens/profile_page.dart';
@@ -21,7 +22,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   
-  final tabItemsList = [
+  List<TabItemModel> tabItemsList = [
     TabItemModel(
       image: "assets/icons/sports.png",
       title: "Sports",
@@ -106,7 +107,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: upcomingEvents.length,
                     itemBuilder: (ctx, index) {
                       final eventModel = upcomingEvents[index];
-                      return HomeEventItem(homeEventModel: eventModel);
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => EventDetailsPage(event: eventModel),
+                            ),
+                          );
+                        },
+                        child: HomeEventItem(homeEventModel: eventModel),
+                      );
                     },
                     padding: EdgeInsets.symmetric(horizontal: 12),
                   );
@@ -151,7 +161,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: randomEvents.length,
                     itemBuilder: (ctx, index) {
                       final eventModel = randomEvents[index];
-                      return HomeEventItem(homeEventModel: eventModel);
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => EventDetailsPage(event: eventModel),
+                            ),
+                          );
+                        },
+                        child: HomeEventItem(homeEventModel: eventModel),
+                      );
                     },
                     padding: EdgeInsets.symmetric(horizontal: 12),
                   );

@@ -1,5 +1,6 @@
 import 'package:event_booking_app_ui/models/tab_item_model.dart';
 import 'package:event_booking_app_ui/providers/event_provider.dart';
+import 'package:event_booking_app_ui/screens/event_detail.dart';
 import 'package:event_booking_app_ui/screens/home/home_screen.dart';
 import 'package:event_booking_app_ui/screens/home/widgets/event_item.dart';
 import 'package:event_booking_app_ui/screens/map_page.dart';
@@ -16,7 +17,6 @@ class EventsPage extends StatefulWidget {
 }
 
 class _EventsPageState extends State<EventsPage> {
-
   var bottomBarItemSelectedIndex = 1; // Start on Events page
 
   void selectBottomBarItem(int index) {
@@ -43,17 +43,24 @@ class _EventsPageState extends State<EventsPage> {
         automaticallyImplyLeading: false,
       ),
       body: eventList.isEmpty
-        ? Center(child: CircularProgressIndicator())
-        : Expanded(
-            child: ListView.builder(
+          ? Center(child: CircularProgressIndicator())
+          : ListView.builder(
               itemCount: eventList.length,
               padding: EdgeInsets.all(12),
               itemBuilder: (ctx, index) {
                 final eventModel = eventList[index];
-                return HomeEventItem(eventModel: eventModel);
+                return GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => EventDetailsPage(event: eventModel),
+                            ),
+                          );
+                        },
+                        child: HomeEventItem(eventModel: eventModel),
+                      );
               },
             ),
-          ),
       bottomNavigationBar: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -77,6 +84,7 @@ class _EventsPageState extends State<EventsPage> {
               isSelected: bottomBarItemSelectedIndex == 1,
               onTap: () {
                 selectBottomBarItem(1);
+                // No navigation needed; this is the current page
               },
             ),
             SizedBox(width: 30), // Spacing for FAB
@@ -119,7 +127,7 @@ class BottomBarItem extends StatelessWidget {
   final bool isSelected;
   final Function onTap;
 
-  BottomBarItem({
+  const BottomBarItem({
     super.key,
     required this.imagePath,
     required this.title,
@@ -130,7 +138,7 @@ class BottomBarItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => onTap.call(),
+      onTap: () => onTap(),
       child: Container(
         margin: EdgeInsets.only(top: 6),
         child: Column(
@@ -140,12 +148,12 @@ class BottomBarItem extends StatelessWidget {
               width: 24,
               height: 24,
               image: AssetImage(imagePath),
-              color: (isSelected) ? MyTheme.customBlue1 : MyTheme.grey,
+              color: isSelected ? MyTheme.customBlue1 : MyTheme.grey,
             ),
             Text(
               title,
               style: TextStyle(
-                color: (isSelected) ? MyTheme.customBlue1 : MyTheme.grey,
+                color: isSelected ? MyTheme.customBlue1 : MyTheme.grey,
               ),
             ),
           ],
@@ -154,3 +162,4 @@ class BottomBarItem extends StatelessWidget {
     );
   }
 }
+

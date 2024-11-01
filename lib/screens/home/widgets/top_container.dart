@@ -45,3 +45,76 @@ class TopContainer extends StatelessWidget {
     );
   }
 }
+class TabItemsList extends StatelessWidget {
+  const TabItemsList({
+    super.key,
+    required this.tabItemsList,
+  });
+
+  final List<TabItemModel> tabItemsList;
+
+  @override
+  Widget build(BuildContext context) {
+    final query = MediaQuery.of(context);
+    return Container(
+      height: 40,
+      width: query.size.width,
+      margin: EdgeInsets.symmetric(vertical: 12),
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (ctx, index) {
+          final item = tabItemsList[index];
+          return TabItem(
+            image: item.image,
+            title: item.title,
+            backgroundColor: item.backgroundColor,
+          );
+        },
+        itemCount: tabItemsList.length,
+      ),
+    );
+  }
+}
+
+class TabItem extends StatelessWidget {
+  String image;
+  String title;
+  Color backgroundColor;
+  TabItem({
+    super.key,
+    required this.image,
+    required this.title,
+    required this.backgroundColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(right: 14),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(24)),
+        color: backgroundColor,
+      ),
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image(
+            image: AssetImage(image),
+            width: 18,
+            height: 18,
+          ),
+          const SizedBox(width: 10),
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 12,
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

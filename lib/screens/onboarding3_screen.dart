@@ -22,7 +22,7 @@ class Onboarding3Screen extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: Container(
               decoration: BoxDecoration(
-                color: Color.fromRGBO(86, 105, 255, 1),
+                color: Color.fromRGBO(132, 201, 134, 100),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(42),
                   topRight: Radius.circular(42),
