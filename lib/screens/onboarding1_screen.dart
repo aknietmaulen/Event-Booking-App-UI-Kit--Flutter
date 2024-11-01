@@ -1,3 +1,4 @@
+import 'package:event_booking_app_ui/screens/login_screen.dart';
 import 'package:event_booking_app_ui/screens/onboarding2_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -12,7 +13,7 @@ class Onboarding1Screen extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            margin: EdgeInsets.only(top: 40),
+            margin: EdgeInsets.only(top: 100),
             child: Align(
                 alignment: Alignment.topCenter,
                 child: Image(
@@ -22,7 +23,7 @@ class Onboarding1Screen extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: Container(
               decoration: BoxDecoration(
-                color: Color.fromRGBO(132, 201, 134, 100),
+                color: Color.fromRGBO(132, 201, 134, 1),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(42),
                   topRight: Radius.circular(42),
@@ -33,7 +34,7 @@ class Onboarding1Screen extends StatelessWidget {
                 children: [
                   SizedBox(height: 40),
                   Text(
-                    ' Explore Upcoming and \nNearby Events ',
+                    ' Explore Upcoming \nVolunteering Events ',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 24,
@@ -44,7 +45,7 @@ class Onboarding1Screen extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    '  In publishing and graphic design, Lorem is \na placeholder text commonly  ',
+                    '  Stay informed about upcoming events happening in \nyour area, and connect with like-minded individuals\n who share your commitment to giving back. ',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 15,
@@ -57,11 +58,18 @@ class Onboarding1Screen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Text(
-                        'Skip',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => LoginScreen(), // Navigate to your Login screen
+                          ));
+                        },
+                        child: Text(
+                          'Skip',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                       Row(

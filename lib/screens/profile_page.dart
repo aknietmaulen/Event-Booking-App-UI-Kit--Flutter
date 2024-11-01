@@ -128,7 +128,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
             // Placeholder text for About Me
             const Text(
-              'Lorem ipsum dolor sit amet consectetur. Dui nisl ornare pellentesque a egestas pellentesque sit blandit turpis. Porttitor felis vitae ac viverra felis id.',
+              'I’m here to help make a difference by volunteering in my community. I enjoy working with others to support local projects and want to do what I can to make things better',
               style: TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 24),
@@ -192,6 +192,13 @@ class _ProfilePageState extends State<ProfilePage> {
               isSelected: bottomBarItemSelectedIndex == 2,
               onTap: () {
                 selectBottomBarItem(2);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => MapPage(
+                      //savedEvents: eventList, // Pass the saved events here
+                    )
+                  ),
+                );
               },
             ),
             BottomBarItem(

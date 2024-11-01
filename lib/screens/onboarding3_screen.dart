@@ -12,7 +12,7 @@ class Onboarding3Screen extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            margin: EdgeInsets.only(top: 40),
+            margin: EdgeInsets.only(top: 100),
             child: Align(
                 alignment: Alignment.topCenter,
                 child: Image(
@@ -22,7 +22,7 @@ class Onboarding3Screen extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: Container(
               decoration: BoxDecoration(
-                color: Color.fromRGBO(132, 201, 134, 100),
+                color: Color.fromRGBO(132, 201, 134, 1),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(42),
                   topRight: Radius.circular(42),
@@ -44,7 +44,7 @@ class Onboarding3Screen extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    '  In publishing and graphic design, Lorem is \na placeholder text commonly  ',
+                    '  Easily discover a wealth of events and \nactivitiesright in your neighborhood \nwith our interactive map feature!  ',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 15,
@@ -57,11 +57,18 @@ class Onboarding3Screen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Text(
-                        'Skip',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => LoginScreen(), // Navigate to your Login screen
+                          ));
+                        },
+                        child: Text(
+                          'Skip',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                       Row(
