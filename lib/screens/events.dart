@@ -16,28 +16,6 @@ class EventsPage extends StatefulWidget {
 }
 
 class _EventsPageState extends State<EventsPage> {
-  final bottomBarItemsDataList = [
-    TabItemModel(
-      image: "assets/icons/ic_explore.png",
-      title: "Explore",
-      backgroundColor: MyTheme.customRed,
-    ),
-    TabItemModel(
-      image: "assets/icons/ic_calendar.png",
-      title: "Events",
-      backgroundColor: MyTheme.customYellowWithOrangeShade,
-    ),
-    TabItemModel(
-      image: "assets/icons/ic_location_marker.png",
-      title: "Map",
-      backgroundColor: MyTheme.foodTabItemColor,
-    ),
-    TabItemModel(
-      image: "assets/icons/ic_profile.png",
-      title: "Profile",
-      backgroundColor: MyTheme.customRed,
-    ),
-  ];
 
   var bottomBarItemSelectedIndex = 1; // Start on Events page
 
@@ -81,8 +59,8 @@ class _EventsPageState extends State<EventsPage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             BottomBarItem(
-              imagePath: bottomBarItemsDataList[0].image,
-              title: bottomBarItemsDataList[0].title,
+              imagePath: "assets/icons/ic_explore.png",
+              title: "Explore",
               isSelected: bottomBarItemSelectedIndex == 0,
               onTap: () {
                 selectBottomBarItem(0);
@@ -94,8 +72,8 @@ class _EventsPageState extends State<EventsPage> {
               },
             ),
             BottomBarItem(
-              imagePath: bottomBarItemsDataList[1].image,
-              title: bottomBarItemsDataList[1].title,
+              imagePath: "assets/icons/ic_calendar.png",
+              title: "Events",
               isSelected: bottomBarItemSelectedIndex == 1,
               onTap: () {
                 selectBottomBarItem(1);
@@ -103,8 +81,8 @@ class _EventsPageState extends State<EventsPage> {
             ),
             SizedBox(width: 30), // Spacing for FAB
             BottomBarItem(
-              imagePath: bottomBarItemsDataList[2].image,
-              title: bottomBarItemsDataList[2].title,
+              imagePath: "assets/icons/ic_location_marker.png",
+              title: "Map",
               isSelected: bottomBarItemSelectedIndex == 2,
               onTap: () {
                 selectBottomBarItem(2);
@@ -116,8 +94,8 @@ class _EventsPageState extends State<EventsPage> {
               },
             ),
             BottomBarItem(
-              imagePath: bottomBarItemsDataList[3].image,
-              title: bottomBarItemsDataList[3].title,
+              imagePath: "assets/icons/ic_profile.png",
+              title: "Profile",
               isSelected: bottomBarItemSelectedIndex == 3,
               onTap: () {
                 selectBottomBarItem(3);
@@ -152,15 +130,11 @@ class BottomBarItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        onTap.call();
-      },
+      onTap: () => onTap.call(),
       child: Container(
-        width: 60, // Set a fixed width for equal sizing
-        padding: EdgeInsets.symmetric(vertical: 8), // Consistent padding for all items
+        margin: EdgeInsets.only(top: 6),
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image(
               width: 24,
@@ -168,15 +142,12 @@ class BottomBarItem extends StatelessWidget {
               image: AssetImage(imagePath),
               color: (isSelected) ? MyTheme.customBlue1 : MyTheme.grey,
             ),
-            SizedBox(height: 4), // Space between icon and text
             Text(
               title,
               style: TextStyle(
-                fontSize: 12, // Ensure consistent font size for all text labels
-                color: isSelected ? MyTheme.customBlue1 : MyTheme.grey,
+                color: (isSelected) ? MyTheme.customBlue1 : MyTheme.grey,
               ),
-              textAlign: TextAlign.center,
-            )
+            ),
           ],
         ),
       ),

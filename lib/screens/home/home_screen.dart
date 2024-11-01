@@ -20,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  
   final tabItemsList = [
     TabItemModel(
       image: "assets/icons/sports.png",
@@ -78,8 +79,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                     ),
                   ),
-                  Text("See All"),
-                  Icon(Icons.arrow_right),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => EventsPage()),
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        Text("See All"),
+                        Icon(Icons.arrow_right),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -88,12 +100,13 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 250,
               child: Consumer<EventsProvider>(
                 builder: (context, provider, child) {
+                  final upcomingEvents = provider.getUpcomingEvents();
                   return ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: provider.events.length,
+                    itemCount: upcomingEvents.length,
                     itemBuilder: (ctx, index) {
-                      final eventModel = provider.events[index];
-                      return HomeEventItem(homeEventModel: eventModel,);
+                      final eventModel = upcomingEvents[index];
+                      return HomeEventItem(homeEventModel: eventModel);
                     },
                     padding: EdgeInsets.symmetric(horizontal: 12),
                   );
@@ -111,21 +124,33 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                     ),
                   ),
-                  Text("See All"),
-                  Icon(Icons.arrow_right),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => EventsPage()),
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        Text("See All"),
+                        Icon(Icons.arrow_right),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
-            // Nearby Events List
+            // Random Events List for "For You"
             SizedBox(
               height: 250,
               child: Consumer<EventsProvider>(
                 builder: (context, provider, child) {
+                  final randomEvents = provider.getRandomEvents();
                   return ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: provider.events.length,
+                    itemCount: randomEvents.length,
                     itemBuilder: (ctx, index) {
-                      final eventModel = provider.events[index];
+                      final eventModel = randomEvents[index];
                       return HomeEventItem(homeEventModel: eventModel);
                     },
                     padding: EdgeInsets.symmetric(horizontal: 12),

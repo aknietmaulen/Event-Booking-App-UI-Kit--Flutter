@@ -76,21 +76,6 @@ class HomeEventItem extends StatelessWidget {
                   ),
                 ),
               ),
-              Positioned(
-                right: 8,
-                top: 8,
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 6, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: MyTheme.white,
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  child: Icon(
-                    Icons.bookmark,
-                    color: MyTheme.customRed,
-                  ),
-                ),
-              )
             ],
           ),
           Padding(
