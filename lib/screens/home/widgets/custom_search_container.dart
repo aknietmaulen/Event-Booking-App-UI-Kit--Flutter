@@ -2,8 +2,11 @@ import 'package:event_booking_app_ui/my_theme.dart';
 import 'package:flutter/material.dart';
 
 class CustomSearchContainer extends StatelessWidget {
+  final Function(String) onSearch;
+
   const CustomSearchContainer({
     super.key,
+    required this.onSearch,
   });
 
   @override
@@ -21,6 +24,7 @@ class CustomSearchContainer extends StatelessWidget {
         ),
         Expanded(
           child: TextField(
+            onChanged: onSearch, // Notify when the input changes
             decoration: InputDecoration(
               hintText: "Search...",
               hintStyle: TextStyle(

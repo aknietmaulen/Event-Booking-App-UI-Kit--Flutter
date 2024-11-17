@@ -49,6 +49,14 @@ class EventsProvider with ChangeNotifier {
     return _randomEvents ?? [];
   }
 
+  List<EventModel> searchEvents(String query) {
+    final lowerCaseQuery = query.toLowerCase();
+    return _events.where((event) {
+      return event.name.toLowerCase().contains(lowerCaseQuery) ||
+             event.category.toLowerCase().contains(lowerCaseQuery) ||
+             event.description.toLowerCase().contains(lowerCaseQuery);
+    }).toList();
+  }
 
 
 

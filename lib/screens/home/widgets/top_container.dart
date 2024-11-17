@@ -7,12 +7,14 @@ import 'package:event_booking_app_ui/screens/map_page.dart';
 import 'package:flutter/material.dart';
 
 class TopContainer extends StatelessWidget {
+  final List<TabItemModel> tabItemsList;
+  final Function(String) onSearch;
+
   const TopContainer({
     super.key,
     required this.tabItemsList,
+    required this.onSearch,
   });
-
-  final List<TabItemModel> tabItemsList;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class TopContainer extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               CustomAppBar(),
-              CustomSearchContainer(),
+              CustomSearchContainer(onSearch: onSearch),
             ],
           ),
           Positioned(
@@ -45,6 +47,7 @@ class TopContainer extends StatelessWidget {
     );
   }
 }
+
 class TabItemsList extends StatelessWidget {
   const TabItemsList({
     super.key,

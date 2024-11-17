@@ -21,6 +21,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String _searchQuery = "";
+
+  void _onSearch(String query) {
+    setState(() {
+      _searchQuery = query.trim().toLowerCase();
+    });
+  }
   
   List<TabItemModel> tabItemsList = [
     TabItemModel(
@@ -63,12 +70,18 @@ class _HomeScreenState extends State<HomeScreen> {
     // Fetch events from provider
     final eventsProvider = Provider.of<EventsProvider>(context);
     eventsProvider.fetchEvents();
+    final filteredEvents = _searchQuery.isEmpty
+        ? eventsProvider.getUpcomingEvents()
+        : eventsProvider.events.where((event) {
+            return event.name.toLowerCase().contains(_searchQuery) ||
+                event.category.toLowerCase().contains(_searchQuery);
+          }).toList();
 
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            TopContainer(tabItemsList: tabItemsList),
+            TopContainer(tabItemsList: tabItemsList, onSearch: _onSearch,),
             SizedBox(height: 30),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -76,51 +89,50 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Expanded(
                     child: Text(
-                      "Upcoming Volunteering Events",
+                       _searchQuery.isEmpty
+                          ? "Upcoming Volunteering Events"
+                          : "Search Results",
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => EventsPage()),
-                      );
-                    },
-                    child: Row(
-                      children: [
-                        Text("See All"),
-                        Icon(Icons.arrow_right),
-                      ],
+                  if (_searchQuery.isEmpty)
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => EventsPage()),
+                        );
+                      },
+                      child: Row(
+                        children: [
+                          Text("See All"),
+                          Icon(Icons.arrow_right),
+                        ],
+                      ),
                     ),
-                  ),
                 ],
               ),
             ),
-            // Upcoming Events List
+            // Display events
             SizedBox(
               height: 250,
-              child: Consumer<EventsProvider>(
-                builder: (context, provider, child) {
-                  final upcomingEvents = provider.getUpcomingEvents();
-                  return ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: upcomingEvents.length,
-                    itemBuilder: (ctx, index) {
-                      final eventModel = upcomingEvents[index];
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => EventDetailsPage(event: eventModel),
-                            ),
-                          );
-                        },
-                        child: HomeEventItem(homeEventModel: eventModel),
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: filteredEvents.length,
+                itemBuilder: (ctx, index) {
+                  final eventModel = filteredEvents[index];
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              EventDetailsPage(event: eventModel),
+                        ),
                       );
                     },
-                    padding: EdgeInsets.symmetric(horizontal: 12),
+                    child: HomeEventItem(homeEventModel: eventModel),
                   );
                 },
+                padding: EdgeInsets.symmetric(horizontal: 12),
               ),
             ),
             SizedBox(height: 30),
