@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:math';
 
 class EventsProvider with ChangeNotifier {
+  String _selectedCategory = "";
   List<EventModel> _events = [];
 
   List<EventModel>? _randomEvents;  // Store selected random events here
@@ -24,6 +25,16 @@ class EventsProvider with ChangeNotifier {
       print('Error fetching events: $error');
     }
   }
+
+  void setCategoryFilter(String category) {
+    _selectedCategory = category;
+    notifyListeners(); // Ensure this is called to notify the UI
+  }
+   // New method to get events by category
+  List<EventModel> getEventsByCategory(String category) {
+    return _events.where((event) => event.category.toLowerCase() == category.toLowerCase()).toList();
+  }
+
   // Get the 4 closest upcoming events by date
   List<EventModel> getUpcomingEvents() {
     DateTime now = DateTime.now();

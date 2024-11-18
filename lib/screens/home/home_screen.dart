@@ -22,17 +22,23 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String _searchQuery = "";
+  String _selectedCategory = "";
 
   void _onSearch(String query) {
     setState(() {
       _searchQuery = query.trim().toLowerCase();
     });
   }
+  void _onCategorySelected(String category) {
+    setState(() {
+      _selectedCategory = category;  // Set the selected category
+    });
+  }
   
   List<TabItemModel> tabItemsList = [
     TabItemModel(
       image: "assets/icons/sports.png",
-      title: "Sports",
+      title: "Sport",
       backgroundColor: MyTheme.blueSport,
     ),
     TabItemModel(
@@ -71,17 +77,20 @@ class _HomeScreenState extends State<HomeScreen> {
     final eventsProvider = Provider.of<EventsProvider>(context);
     eventsProvider.fetchEvents();
     final filteredEvents = _searchQuery.isEmpty
-        ? eventsProvider.getUpcomingEvents()
+        ? (_selectedCategory.isEmpty
+            ? eventsProvider.getUpcomingEvents()
+            : eventsProvider.getEventsByCategory(_selectedCategory))
         : eventsProvider.events.where((event) {
             return event.name.toLowerCase().contains(_searchQuery) ||
                 event.category.toLowerCase().contains(_searchQuery);
           }).toList();
 
+    
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            TopContainer(tabItemsList: tabItemsList, onSearch: _onSearch,),
+            TopContainer(tabItemsList: tabItemsList, onSearch: _onSearch,onCategorySelected: _onCategorySelected),
             SizedBox(height: 30),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 16, vertical: 16),

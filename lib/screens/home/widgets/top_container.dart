@@ -9,11 +9,14 @@ import 'package:flutter/material.dart';
 class TopContainer extends StatelessWidget {
   final List<TabItemModel> tabItemsList;
   final Function(String) onSearch;
+  final Function(String) onCategorySelected;  // New parameter
 
   const TopContainer({
     super.key,
     required this.tabItemsList,
     required this.onSearch,
+    required this.onCategorySelected,  // Pass it here
+
   });
 
   @override
@@ -40,7 +43,7 @@ class TopContainer extends StatelessWidget {
           ),
           Positioned(
             bottom: -30,
-            child: TabItemsList(tabItemsList: tabItemsList),
+            child: TabItemsList(tabItemsList: tabItemsList, onCategorySelected: onCategorySelected, ),
           )
         ],
       ),
@@ -52,9 +55,11 @@ class TabItemsList extends StatelessWidget {
   const TabItemsList({
     super.key,
     required this.tabItemsList,
+    required this.onCategorySelected, 
   });
 
   final List<TabItemModel> tabItemsList;
+  final Function(String) onCategorySelected; 
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +76,7 @@ class TabItemsList extends StatelessWidget {
             image: item.image,
             title: item.title,
             backgroundColor: item.backgroundColor,
+            onTap: onCategorySelected,
           );
         },
         itemCount: tabItemsList.length,
@@ -83,40 +89,45 @@ class TabItem extends StatelessWidget {
   String image;
   String title;
   Color backgroundColor;
+  final Function(String) onTap; 
   TabItem({
     super.key,
     required this.image,
     required this.title,
     required this.backgroundColor,
+    required this.onTap, 
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 14),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(24)),
-        color: backgroundColor,
-      ),
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Image(
-            image: AssetImage(image),
-            width: 18,
-            height: 18,
-          ),
-          const SizedBox(width: 10),
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 12,
-              color: Colors.white,
-              fontWeight: FontWeight.w500,
+    return GestureDetector(
+      onTap: () => onTap(title), // Trigger the onTap with the category title
+        child: Container(
+        margin: EdgeInsets.only(right: 14),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(24)),
+          color: backgroundColor,
+        ),
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image(
+              image: AssetImage(image),
+              width: 18,
+              height: 18,
             ),
-          ),
-        ],
+            const SizedBox(width: 10),
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 12,
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
